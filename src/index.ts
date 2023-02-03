@@ -21,23 +21,23 @@ export default class Server {
   }
 
   public config(app: Application): void {
-    const logPath = path.join(__dirname, '../logs');
-    if (!fs.existsSync(logPath)) {
-      fs.mkdirSync(logPath);
-    }
-    const accessLogStream: WriteStream = fs.createWriteStream(
-      path.join(logPath, 'access.log'),
-      {
-        flags: 'a+',
-      }
-    );
-    app.use(morgan('combined', { stream: accessLogStream }));
-    app.use(urlencoded({ extended: true }));
-    app.use(json());
-    app.use(cors());
-    // app.use('/backend', estatic(path.join(__dirname, '../../frontend/build')));
-    app.use(helmet());
-    app.use(rateLimiter()); //  apply to all requests
+    // const logPath = path.join(__dirname, '../logs');
+    // if (!fs.existsSync(logPath)) {
+    //   fs.mkdirSync(logPath);
+    // }
+    // const accessLogStream: WriteStream = fs.createWriteStream(
+    //   path.join(logPath, 'access.log'),
+    //   {
+    //     flags: 'a+',
+    //   }
+    // );
+    // app.use(morgan('combined', { stream: accessLogStream }));
+    // app.use(urlencoded({ extended: true }));
+    // app.use(json());
+    // app.use(cors());
+    // // app.use('/backend', estatic(path.join(__dirname, '../../frontend/build')));
+    // app.use(helmet());
+    // app.use(rateLimiter()); //  apply to all requests
     app.use(passport.initialize());
 
     passportMiddleware(passport);

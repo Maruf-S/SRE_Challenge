@@ -344,7 +344,7 @@
 			"response": []
 		},
 		{
-			"name": "Collections Copy",
+			"name": "Get Single Task",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
