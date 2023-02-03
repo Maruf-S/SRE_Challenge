@@ -13,7 +13,7 @@ class CollectionsRepository {
     },
   };
   // Get collections with tasks of a certain user
-  async getCollectionsWithTasks(userId) {
+  async getCollectionsWithTaskCounts(userId) {
     return await prisma.collection
       .findMany({
         where: {
@@ -25,9 +25,10 @@ class CollectionsRepository {
         },
         // Allow nesting subtasks only upto 3 level so it can work in accordance to the UI provided
         include: {
+          _count: true,
           tasks: {
-            include: {
-              ...this.maxNestQuery,
+            where: {
+              userId,
             },
           },
           UserFavoriteCollections: {
@@ -46,10 +47,42 @@ class CollectionsRepository {
             ).includes(userId),
             icon: collection.icon,
             name: collection.name,
-            tasks: collection.tasks,
+            tasks: collection.tasks.length,
           };
         })
       );
+  }
+  async getASingleCollectionsWithTasks(userId, collectionId) {
+    const collection = await prisma.collection.findUnique({
+      where: {
+        id: collectionId,
+      },
+      // Allow nesting subtasks only upto 3 level so it can work in accordance to the UI provided
+      include: {
+        tasks: {
+          include: {
+            ...this.maxNestQuery,
+          },
+          where: {
+            userId,
+          },
+        },
+        UserFavoriteCollections: {
+          select: {
+            userId: true,
+          },
+        },
+      },
+    });
+    return {
+      id: collection?.id,
+      favorite: collection?.UserFavoriteCollections.map(
+        (e) => e.userId
+      ).includes(userId),
+      icon: collection?.icon,
+      name: collection?.name,
+      tasks: collection?.tasks,
+    };
   }
   async favoriteCollection(id, userId, favorite) {
     if (!favorite) {

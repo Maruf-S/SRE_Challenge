@@ -18,7 +18,7 @@ class CollectionRoutes {
      *   get:
      *     security:
      *        - bearerAuth: []
-     *     summary: Get All Collections With The Tasks and SubTasks
+     *     summary: Get All Collections With The Tasks Count
      *     tags: [Collections]
      *     produces:
      *       - application/json
@@ -30,7 +30,29 @@ class CollectionRoutes {
       .route('/')
       .get(
         userAuth,
-        asyncMiddleware(this.collectionController.getCollectionsWithTasks)
+        asyncMiddleware(this.collectionController.getCollectionsWithTaskCount)
+      );
+    /**
+     * @swagger
+     * /api/collections/:id:
+     *   get:
+     *     security:
+     *        - bearerAuth: []
+     *     summary: Get A Single Collection With Subtasks
+     *     tags: [Collections]
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: Collections
+     */
+    this.router
+      .route('/:id')
+      .get(
+        userAuth,
+        asyncMiddleware(
+          this.collectionController.getASingleCollectionsWithTasks
+        )
       );
 
     /**
@@ -59,7 +81,7 @@ class CollectionRoutes {
      *       401:
      *         description: Unauthorized
      *       201:
-     *         description: Status changed successfuly
+     *         description: Status changed successfully
      */
     this.router
       .route('/favorite')

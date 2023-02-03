@@ -15,13 +15,29 @@ export default class CollectionController {
     );
     return res.status(201).json({ success: true });
   }
-  async getCollectionsWithTasks(
+  async getCollectionsWithTaskCount(
     req: Request | any,
     res: Response,
     next: NextFunction
   ) {
     return res
       .status(200)
-      .json(await CollectionRepository.getCollectionsWithTasks(req.user.id));
+      .json(
+        await CollectionRepository.getCollectionsWithTaskCounts(req.user.id)
+      );
+  }
+  async getASingleCollectionsWithTasks(
+    req: Request | any,
+    res: Response,
+    next: NextFunction
+  ) {
+    return res
+      .status(200)
+      .json(
+        await CollectionRepository.getASingleCollectionsWithTasks(
+          req.user.id,
+          req.params.id
+        )
+      );
   }
 }
