@@ -25,10 +25,12 @@ class CollectionsRepository {
         },
         // Allow nesting subtasks only upto 3 level so it can work in accordance to the UI provided
         include: {
-          _count: true,
           tasks: {
             where: {
               userId,
+            },
+            select: {
+              completed: true,
             },
           },
           UserFavoriteCollections: {
@@ -48,6 +50,7 @@ class CollectionsRepository {
             icon: collection.icon,
             name: collection.name,
             tasks: collection.tasks.length,
+            completedTasks: collection?.tasks.filter((e) => e.completed).length,
           };
         })
       );

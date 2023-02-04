@@ -40,6 +40,10 @@ class CollectionRoutes {
      *        - bearerAuth: []
      *     summary: Get A Single Collection With Subtasks
      *     tags: [Collections]
+     *     parameters:
+     *         - name: id
+     *           in: path
+     *           required: true
      *     produces:
      *       - application/json
      *     responses:

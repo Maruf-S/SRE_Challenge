@@ -12,7 +12,6 @@ import passportMiddleware from './middlewares/passport';
 import logger from './logger';
 import * as cors from 'cors';
 import helmet = require('helmet');
-// app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
 
 export default class Server {
   constructor(app: Application) {
@@ -21,23 +20,24 @@ export default class Server {
   }
 
   public config(app: Application): void {
-    // const logPath = path.join(__dirname, '../logs');
-    // if (!fs.existsSync(logPath)) {
-    //   fs.mkdirSync(logPath);
-    // }
-    // const accessLogStream: WriteStream = fs.createWriteStream(
-    //   path.join(logPath, 'access.log'),
-    //   {
-    //     flags: 'a+',
-    //   }
-    // );
-    // app.use(morgan('combined', { stream: accessLogStream }));
-    // app.use(urlencoded({ extended: true }));
-    // app.use(json());
-    // app.use(cors());
-    // // app.use('/backend', estatic(path.join(__dirname, '../../frontend/build')));
+    app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
+    const logPath = path.join(__dirname, '../logs');
+    if (!fs.existsSync(logPath)) {
+      fs.mkdirSync(logPath);
+    }
+    const accessLogStream: WriteStream = fs.createWriteStream(
+      path.join(logPath, 'access.log'),
+      {
+        flags: 'a+',
+      }
+    );
+    app.use(morgan('combined', { stream: accessLogStream }));
+    app.use(urlencoded({ extended: true }));
+    app.use(json());
+    app.use(cors());
+    // app.use('/backend', estatic(path.join(__dirname, '../../frontend/build')));
     // app.use(helmet());
-    // app.use(rateLimiter()); //  apply to all requests
+    app.use(rateLimiter()); //  apply to all requests
     app.use(passport.initialize());
 
     passportMiddleware(passport);

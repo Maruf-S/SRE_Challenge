@@ -17,5 +17,4 @@ const userAuth = function (req: any, res: any, next: any) {
     return next();
   })(req, res, next);
 };
-// const userAuth = passport.authenticate('jwt', { session: false });
 export default userAuth;
