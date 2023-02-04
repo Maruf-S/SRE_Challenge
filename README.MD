@@ -3,8 +3,8 @@ This is a repo for Scientific Revolution Earth Fullstack - Challenge
 Deployed URL: http://18.233.63.31 (hosted on AWS EC2 instance)
 
 You can create your own account or use the one below to get loaded data
-- Username : user
-- Password : user
+- Username : maruf
+- Password : maruf
 
 The project is build using:
 - React
