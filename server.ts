@@ -6,7 +6,7 @@ import ApiServer from './src/index';
 import * as http from 'http';
 const app: Application = express();
 const server: ApiServer = new ApiServer(app);
-const port: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const port: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
 const httpServer = http.createServer(app);
 httpServer
   .listen(port, function () {

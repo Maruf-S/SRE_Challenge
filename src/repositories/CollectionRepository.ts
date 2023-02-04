@@ -69,6 +69,9 @@ class CollectionsRepository {
           where: {
             userId,
           },
+          orderBy: {
+            date: 'asc',
+          },
         },
         UserFavoriteCollections: {
           select: {

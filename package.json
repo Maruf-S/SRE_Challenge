@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "Test Run 1.0",
   "scripts": {
-    "start": "set PORT=3000 && npm run transpile && node server.js",
+    "start": "set PORT=3001 && npm run transpile && node server.js",
     "dev": "concurrently \"npm:watch\" \"npm:serve\"",
     "serve": "node dist/server.js",
     "watch": "tsc -w",
     "transpile": "tsc",
     "seed": "npm run transpile && node src/db/seed.js",
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "forever": "export PORT=80 || set PORT=80 && npm run transpile && forever start server.js"
+    "forever": "export PORT=80 || set PORT=80 && npm run transpile && forever start dist/server.js"
   },
   "engines": {
     "node": ">=8.0"
