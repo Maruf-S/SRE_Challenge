@@ -14,7 +14,7 @@ The project is build using:
 - Prisma ORM
 - PostgeSql (Couldn't find a free tier hosting service for mysql )
 - AWS
-You can find the API documentaion here: http://18.233.63.31/api/api-docs
+You can find the API documentaion here: http://18.233.63.31/api-docs
 
 - Here is the sample web screenshot for the app:
 
