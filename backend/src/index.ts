@@ -35,7 +35,7 @@ export default class Server {
     app.use(urlencoded({ extended: true }));
     app.use(json());
     app.use(cors());
-    // app.use('/backend', estatic(path.join(__dirname, '../../frontend/build')));
+    app.use('/', estatic(path.join(__dirname, '../../../frontend/build')));
     // app.use(helmet());
     app.use(rateLimiter()); //  apply to all requests
     app.use(passport.initialize());

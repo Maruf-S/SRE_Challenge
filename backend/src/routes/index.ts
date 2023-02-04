@@ -13,10 +13,10 @@ export default class Routes {
     app.use('/api/collections', CollectionRoutes);
     app.use('/api/tasks', TaskRoutes);
     app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
-    // app.get('*', (req, res) => {
-    //   res.sendFile(
-    //     path.join(__dirname, '../../../web-ticket/build/index.html')
-    //   );
-    // });
+    app.get('*', (req, res) => {
+      res.sendFile(
+        path.join(__dirname, '../../../../frontend/build/index.html')
+      );
+    });
   }
 }
