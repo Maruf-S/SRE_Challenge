@@ -10,7 +10,11 @@ interface IProps {
 export default function Center({ children }: IProps) {
   return (
     <Row align={"middle"} justify="center">
-      <Col xs={{ span: 20, offset: 0 }} md={{ span: 16, offset: 0 }} lg={{ span: 12, offset: 0 }}>
+      <Col
+        xs={{ span: 18, offset: 0 }}
+        md={{ span: 16, offset: 0 }}
+        lg={{ span: 12, offset: 0 }}
+      >
         {children}
       </Col>
     </Row>

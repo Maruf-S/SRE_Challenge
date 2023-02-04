@@ -16,13 +16,6 @@ class CollectionsRepository {
   async getCollectionsWithTaskCounts(userId) {
     return await prisma.collection
       .findMany({
-        where: {
-          tasks: {
-            every: {
-              userId,
-            },
-          },
-        },
         // Allow nesting subtasks only upto 3 level so it can work in accordance to the UI provided
         include: {
           tasks: {

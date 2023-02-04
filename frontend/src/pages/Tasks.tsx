@@ -1,17 +1,22 @@
-import { MenuProps, Space } from 'antd';
-import { Layout, Menu, Typography } from 'antd';
-import TasksView from '../views/TasksView';
+import { MenuProps, Space } from "antd";
+import { Layout, Menu, Typography } from "antd";
+import TasksView from "../views/TasksView";
 
-import { Link, useParams } from 'react-router-dom';
-import { useCollections } from '../components/collectionsContainer/CollectionsContainer';
-import { getMenuFromData } from '../constant';
+import { Link, useParams } from "react-router-dom";
+import { useCollections } from "../components/collectionsContainer/CollectionsContainer";
+import { getMenuFromData } from "../constant";
 
 const { Text } = Typography;
 const { Sider } = Layout;
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>["items"][number];
 
-function getItem(label: React.ReactNode, key: React.Key, icon?: React.ReactNode, children?: MenuItem[]): MenuItem {
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[]
+): MenuItem {
   return {
     key,
     icon,
@@ -25,18 +30,18 @@ export default function Tasks() {
   const menuItems = getMenuFromData(data);
   const { collectionId } = useParams();
 
-  if (status === 'loading') return null;
+  if (status === "loading") return null;
   const items: MenuItem[] = [
-    getItem(<Text strong>Collections</Text>, 'collections', null, [
+    getItem(<Text strong>Collections</Text>, "collections", null, [
       ...menuItems?.map((e: any) =>
         getItem(
-          '',
+          "",
           e.id,
           <Link to={e.link}>
             <Space>
               <div style={{ width: 40 }}>
                 <img src={e.src} height="30px" alt="Logo" />
-              </div>{' '}
+              </div>{" "}
               {e.name}
             </Space>
           </Link>
@@ -45,13 +50,18 @@ export default function Tasks() {
     ]),
   ];
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider theme="light" breakpoint="lg" collapsedWidth="0">
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider
+        theme="light"
+        breakpoint="lg"
+        collapsedWidth="0"
+        reverseArrow={false}
+      >
         <Menu
           defaultSelectedKeys={[collectionId!]}
-          defaultOpenKeys={['collections']}
+          defaultOpenKeys={["collections"]}
           inlineIndent={0}
-          style={{ border: 'none', backgroundColor: 'transparent' }}
+          style={{ border: "none", backgroundColor: "transparent" }}
           mode="inline"
           items={items}
         />
