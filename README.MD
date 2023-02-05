@@ -7,7 +7,7 @@ You can create your own account or use the one below to get loaded data
 - Password : maruf
 
 The project is build using:
-- React
+- React (antd)
 - Node.js
 - Express.js
 - Typescript
